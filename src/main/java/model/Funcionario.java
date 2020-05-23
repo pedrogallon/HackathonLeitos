@@ -40,12 +40,15 @@ public class Funcionario{
 	}
 	
 	public Funcionario(int id, String cpf, String tipo, String nome, String senha) {
-		super();
 		this.id = id;
 		this.cpf = cpf;
 		this.tipo = tipo;
 		this.nome = nome;
 		this.senha = senha;
+	}
+	
+	public Funcionario() {
+
 	}
 	
 	

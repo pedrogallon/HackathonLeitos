@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//PT-BR"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="service.FuncionarioMapper">
+	<resultMap id="funcionario" autoMapping="false"
+		type="model.Funcionario">
+		
+		<id property="id" column="id" />
+		<result property="cpf" column="cpf" />
+		<result property="nome" column="nome" />
+		<result property="senha" column="senha" />
+		<result property="tipo" column="tipo" />
+	</resultMap>
+
+	<select id="getFuncionarioById" resultMap="funcionario">
+		SELECT
+		
+			id,
+			cpf,
+			nome,
+			senha,
+			tipo
+			
+			FROM funcionario
+			WHERE id= #{id}
+
+	</select>
+	
+	<select id="getFuncionarios" resultMap="funcionario">
+		SELECT
+		
+			id,
+			cpf,
+			nome,
+			senha,
+			tipo
+			
+			FROM funcionario
+
+	</select>
+
+	<!-- createUsuario() -->
+	<insert id="createUsuario">
+		INSERT
+		INTO usuario
+		(
+			tipo,
+			cpf,
+			nome,
+			dta_nascimento,
+			email,
+			ddd,
+			telefone,
+			genero,
+			senha
+			<if test="createEndereco == true">
+				,endereco
+			</if>
+		) VALUES (
+			#{tipo},
+			#{cpf},
+			#{nome},
+			str_to_date(#{dta_nascimento}, '%d/%m/%Y'),
+			lower(#{email}),
+			#{ddd},
+			#{telefone},
+			#{genero},
+			#{senha}
+			<if test="createEndereco == true">
+				,(select max(id) from endereco)
+			</if>
+		)
+	</insert>
+	
+	<update id="updateUsuario">
+		UPDATE usuario set
+		tipo=#{tipo},
+		cpf=#{cpf},
+		nome=#{nome},
+		dta_nascimento=str_to_date(#{dta_nascimento}, '%d/%m/%Y'),
+		email=lower(#{email}),
+		ddd=#{ddd},
+		telefone=#{telefone},
+		genero=#{genero},
+		senha=#{senha}
+		where id = #{id}
+	</update>
+	
+</mapper>

@@ -29,23 +29,20 @@ public class FuncionarioController {
 			Funcionario funcionario = funcarioDAO.getFuncionarioOnLogin(email, senha);
 			if (funcionario != null) {
 				result.use(Results.json()).withoutRoot().from(funcionario).serialize();
-			}else {
+			} else {
 				result.use(Results.json()).withoutRoot().from("NOTIFICACAO: Funcionario inválido!").serialize();
 			}
 
 		} catch (Exception e) {
-			result.use(Results.json()).withoutRoot().from("ERRO: "+e.getMessage()).serialize();
+			result.use(Results.json()).withoutRoot().from("ERRO: " + e.getMessage()).serialize();
 		}
 
 	}
-
 
 	@Path("/logout")
 	public void logout() {
 
 	}
-
-	
 
 	@Path("/createFuncionario")
 	public void createFuncionario(Funcionario funcionario) {
@@ -55,7 +52,7 @@ public class FuncionarioController {
 			funcionarioDAO.createFuncionario(funcionario);
 			result.use(Results.json()).withoutRoot().from("NOTIFICACAO: Funcionario criado com sucesso").serialize();
 		} catch (Exception e) {
-			result.use(Results.json()).withoutRoot().from("ERRO: "+e.getMessage()).serialize();
+			result.use(Results.json()).withoutRoot().from("ERRO: " + e.getMessage()).serialize();
 		}
 	}
 
@@ -66,7 +63,7 @@ public class FuncionarioController {
 			funcionarioDAO.updateFuncionario(funcionario);
 			result.use(Results.json()).withoutRoot().from("NOTIFICACAO: Alterado com sucesso").serialize();
 		} catch (Exception e) {
-			result.use(Results.json()).withoutRoot().from("ERRO: "+e.getMessage()).serialize();
+			result.use(Results.json()).withoutRoot().from("ERRO: " + e.getMessage()).serialize();
 		}
 	}
 
@@ -77,12 +74,10 @@ public class FuncionarioController {
 			List<Funcionario> funcionarios = funcionarioDAO.getFuncionarios();
 			result.use(Results.json()).withoutRoot().from(funcionarios).serialize();
 		} catch (Exception e) {
-			result.use(Results.json()).withoutRoot().from("ERRO: "+e.getMessage()).serialize();
+			result.use(Results.json()).withoutRoot().from("ERRO: " + e.getMessage()).serialize();
 		}
 	}
 
-	
-	
 	@Path("/getFuncionarioById")
 	public void getfuncionarioById(int id) {
 		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
@@ -90,8 +85,8 @@ public class FuncionarioController {
 			Funcionario funcionario = funcionarioDAO.getFuncionarioById(id);
 			result.use(Results.json()).withoutRoot().from(funcionario).serialize();
 		} catch (Exception e) {
-			result.use(Results.json()).withoutRoot().from("ERRO: ID inexistente para Usuário; ID: "+id+";	\n"+e.getMessage()).serialize();
+			result.use(Results.json()).withoutRoot()
+					.from("ERRO: ID inexistente para Usuário; ID: " + id + ";	\n" + e.getMessage()).serialize();
 		}
 	}
 }
-

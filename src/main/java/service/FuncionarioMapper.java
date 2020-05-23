@@ -17,10 +17,6 @@ public interface FuncionarioMapper {
 	Funcionario getFuncionarioById(
 			@Param("id") int id);
 	
-	//	retorna Funcionario com login
-	Funcionario getFuncionarioOnLogin(
-			@Param("email") String email,
-			@Param("senha") String senha);
 
 	//cria Funcionario (Segundo Semestre)
 	void createFuncionario(
